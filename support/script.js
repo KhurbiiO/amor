@@ -1,10 +1,22 @@
-/* Envelope Opening */
 const intro = document.getElementById("intro");
 const envelope = document.getElementById("envelope");
 const main = document.getElementById("main");
+const music = document.getElementById("bgMusic");
 
 envelope.addEventListener("click", () => {
     envelope.classList.add("open");
+
+    // Fade-in music
+    music.volume = 0;
+    music.play();
+
+    let fadeAudio = setInterval(() => {
+        if (music.volume < 0.4) {
+            music.volume += 0.02;
+        } else {
+            clearInterval(fadeAudio);
+        }
+    }, 200);
 
     setTimeout(() => {
         intro.classList.add("hidden");
@@ -12,7 +24,8 @@ envelope.addEventListener("click", () => {
     }, 800);
 });
 
-/* Slideshow */
+/* ================= SLIDESHOW ================= */
+
 const slides = document.getElementById("slides");
 const totalSlides = document.querySelectorAll(".slide").length;
 let index = 0;
